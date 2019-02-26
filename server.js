@@ -1,0 +1,22 @@
+const express = require('express');
+const bodyParser = require('body-parser'); 
+
+//  create express app
+
+const app = express();
+
+//  parse requests of content-type - application
+app.use(bodyParser.urlencoded({ extended: true }))
+
+// parse requests of content-type - application/json
+app.use(bodyParser.json())
+
+//  define a simple route
+app.get('/', (req,res) => {
+    res.json({"message": "Interface d'utilisateur"})
+});
+
+// listen for requests 
+app.listen(3000, () => {
+    console.log("Server is listening on port 3000");
+});
