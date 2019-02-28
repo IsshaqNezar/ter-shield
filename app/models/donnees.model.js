@@ -1,4 +1,4 @@
-const mongoose = mongoose('mongoose');
+const mongoose = require('mongoose');
 
 const DataSchema = mongoose.Schema({
     title: String,
@@ -7,4 +7,4 @@ const DataSchema = mongoose.Schema({
     timestamp: true
 });
 
-module.exports = mongoose.model('Data', DataSchema);
+module.exports = mongoose.model('Donnees', DataSchema);

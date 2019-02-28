@@ -1,0 +1,8 @@
+module.exports = (app) => {
+    const donnees = require('../controllers/donnees.controller.js');
+
+    // Récupérer les données 
+    app.post('/data', donnees.create);
+
+    app.get('/data', donnees.findAll);
+}
