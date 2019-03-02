@@ -11,6 +11,22 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // requêtes d'analyse de type - application/json
 app.use(bodyParser.json())
 
+app.use(function(req, res, next){
+
+    //Website you wish yo allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Reqhest mothods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET', 'POST');
+
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+    next();
+});
+
+app.use(express.static('src'));
+
+
 // Configuration de la base de données 
 const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose');

@@ -5,4 +5,6 @@ module.exports = (app) => {
     app.post('/data', donnees.create);
 
     app.get('/data', donnees.findAll);
+
+    app.get('/data/:dataId', donnees.findOne);
 }

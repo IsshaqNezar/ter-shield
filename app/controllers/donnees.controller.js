@@ -1,4 +1,4 @@
-const Donnees = require('../models/donnees.model.js');
+const Donnee = require('../models/donnees.model.js');
 
 // Créer et enregistrer des données 
 
@@ -13,14 +13,14 @@ exports.create = (req, res) => {
     }
 
     // Créer une donnée dans le DB
-    const donnees = new Donnees({
+    const donnee = new Donnee({
         valeur: req.body.valeur,
         heure: req.body.heure || "Heure indéterminée",
     });
 
     // Enregistrement de la donnée sur la DB
 
-    donnees.save()
+    donnee.save()
     .then(data => {
         res.send(data);
     }).catch(err => {
@@ -31,9 +31,39 @@ exports.create = (req, res) => {
 
 };
 
-// Récupérer les données depuis la base de données 
+// Récupérer les données depuis la DB
 
-exports.findAll = (req, res) => {
+exports.findAll = (req,res) =>  {
+    Donnee.find()
+    .then(donnees => {
+        res.send(donnees);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Une erreure est apparue."
+        });
+    });
 
+};
+
+// Récupérer une donnée de la DB
+exports.findOne = (req, res) => {
+    Donnee.findById(req.params.dataId)
+    .then(donnee =>{
+        if(!donnee) {
+            return res.status(404).send({
+                message: "La donnée n'a pas été trouvée" + req.params.dataId
+            });
+        }
+        res.send(donnee);
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Donnée non trouvée" + req.params.dataId
+            });
+        }
+        return res.status(500).send({
+            message: "Erreur lors de la récupération" + req.params.dataId
+        });
+    });
 
 };
