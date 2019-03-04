@@ -1,27 +1,93 @@
 $(function (){
 
     var $donnees = $('#donnees');
-    var valeur;
+    var alea;
 
     $.ajax({
         type: 'GET',
         url :'/data',
-        success: function(donnees) {
+        success: afficherData,
+        error: error,
+    });
+
+
+        function afficherData(donnees) {
             $.each(donnees, function(i, donnee) {
                 $donnees.append('<li>valeur: '+ donnee.valeur+', heure:'+ donnee.heure +'</li>');
             });
-        },
-        error: function() {
+        };
+
+        function newData(nouvelleDonnee) {
+            $donnees.append('<li>valeur: '+ nouvelleDonnee.valeur+', heure:'+ nouvelleDonnee.heure +'</li>');
+            reload();       
+        };
+        
+        function error(xhr,status,error) {
             alert('error loading orders');
-        }
-    });
+            console.log(xhr, status, error);
+        };
 
         function aleatoire(min, max) {
 
-            return (Math.floor(Math.random() * (max - min)) + min);                      
+            alea = Math.floor(Math.random() * (max - min)) + min;
+
+            return alea;                      
         };
 
+        function saveData(alea) {
+
+            var objetDonnee = {
+                valeur: alea,
+                heure: '0',
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/data',
+                data: objetDonnee,
+                success: newData,
+                error: error,
+            });
+
+        };
+
+        function enregistrementAlea() {
+
+            aleatoire(0,20);
+            saveData(alea);
+            console.log('Test');
+        };
+
+        enregistrementAlea();
+        
+
+
+        function reload(){
+            var container = document.getElementById("#donnees");
+            var content = container.innerHTML;
+            container.innerHTML= content; 
+            
+           //this line is to watch the result in console , you can remove it later	
+            console.log("Refreshed"); 
+        };
+
+    // Fonctions non finies
+    
+        function dateTest() {
+            var date = new Date();
+            var Jour, Moi, Annee, Heure, Min, Seconde;
+            Jour = 
+            date = date.getTime();
+            return date;
+
+
+            
+        }
+        
+
+
         function boucle() {
+
             var i = 0;
             var valeur = [];
             while (i < 5) {
@@ -31,9 +97,4 @@ $(function (){
 
             return valeur;
         };
-
-          
-    
-        
-
 });
