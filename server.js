@@ -48,7 +48,7 @@ app.get('/', (req,res) => {
     res.json({"message": "Interface d'utilisateur"})
 });
 
-require('./app/routes/donnees.routes.js') (app);
+require('./src/app/routes/donnees.routes.js') (app);
 
 // Ecoute du port  
 app.listen(3000, () => {
