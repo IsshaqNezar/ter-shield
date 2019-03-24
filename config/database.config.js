@@ -1,4 +1,4 @@
 module.exports = {
-    url: 'mongodb+srv://IsshaqN:<a7jkjJwT_>@cluster0-ccciq.mongodb.net/ter-shield'
+    url: 'mongodb+srv://IsshaqN:a7jkjJwT_@cluster0-ccciq.mongodb.net/ter-shield'
 }
 
