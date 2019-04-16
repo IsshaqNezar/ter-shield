@@ -15,7 +15,7 @@ exports.create = (req, res) => {
     // Créer une donnée dans le DB
     const donnee = new Donnee({
         valeur: req.body.valeur,
-        heure: req.body.heure || "Heure indéterminée",
+        date: req.body.date || "Date indéterminée",
     });
 
     // Enregistrement de la donnée sur la DB

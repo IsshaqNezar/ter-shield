@@ -13,12 +13,12 @@ $(function (){
 
         function afficherData(donnees) {
             $.each(donnees, function(i, donnee) {
-                $donnees.append('<li>valeur: '+ donnee.valeur+', heure:'+ donnee.heure +'</li>');
+                $donnees.append('<li>valeur: '+ donnee.valeur+', date:'+ donnee.date +'</li>');
             });
         };
 
         function newData(nouvelleDonnee) {
-            $donnees.append('<li>valeur: '+ nouvelleDonnee.valeur+', heure:'+ nouvelleDonnee.heure +'</li>');
+            $donnees.append('<li>valeur: '+ nouvelleDonnee.valeur+', date:'+ nouvelleDonnee.date +'</li>');
             reload();       
         };
         
@@ -38,7 +38,7 @@ $(function (){
 
             var objetDonnee = {
                 valeur: alea,
-                heure: '0',
+                date: '0',
             };
 
             $.ajax({

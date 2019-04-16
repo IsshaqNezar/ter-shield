@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const DataSchema = mongoose.Schema({
     valeur: String,
-    heure: String
+    date: String
 }, {
     timestamp: true
 });
