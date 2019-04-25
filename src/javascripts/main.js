@@ -74,13 +74,15 @@ $(function (){
     // Fonctions non finies
     
         function dateTest() {
-            var date = new Date();
+            /* var date = new Date();
             var Jour, Moi, Annee, Heure, Min, Seconde;
             Jour = 
             date = date.getTime();
-            return date;
+            return date; */
+            var d = new Date();
 
-
+            console.log(d);
+            
             
         }
         
