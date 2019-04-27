@@ -1,25 +1,30 @@
 $(function (){
 
     var $donnees = $('#donnees');
+
+    var myChart = document.getElementById('myChart').getContext('2d');
+
+    var tableau = [];
     var alea;
+    var i = 0;
 
     $.ajax({
         type: 'GET',
         url :'/data',
-        success: afficherData,
+        success: RecupData,
         error: error,
     });
 
 
         function afficherData(donnees) {
             $.each(donnees, function(i, donnee) {
-                $donnees.append('<li>valeur: '+ donnee.valeur+', date:'+ donnee.date +'</li>');
+               $donnees.append('<li>valeur: '+ donnee.valeur+', date:'+ donnee.date +'</li>');
             });
         };
 
         function newData(nouvelleDonnee) {
-            $donnees.append('<li>valeur: '+ nouvelleDonnee.valeur+', date:'+ nouvelleDonnee.date +'</li>');
-            reload();       
+           $donnees.append('<li>valeur: '+ nouvelleDonnee.valeur+', date:'+ nouvelleDonnee.date +'</li>');
+           reload();       
         };
         
         function error(xhr,status,error) {
@@ -28,7 +33,7 @@ $(function (){
         };
 
         function aleatoire(min, max) {
-
+            
             alea = Math.floor(Math.random() * (max - min)) + min;
 
             return alea;                      
@@ -45,22 +50,26 @@ $(function (){
                 type: 'POST',
                 url: '/data',
                 data: objetDonnee,
-                success: newData,
+                //success: newData,
                 error: error,
             });
 
         };
 
         function enregistrementAlea() {
-
+            
             aleatoire(0,20);
             saveData(alea);
             console.log('Test');
+
+        
         };
 
+        /* var i = 0;
+        while (i<10){
         enregistrementAlea();
-        
-
+        i++;
+        } */
 
         function reload(){
             var container = document.getElementById("#donnees");
@@ -99,4 +108,45 @@ $(function (){
 
             return valeur;
         };
+
+        /////////////////////////////// CHART //////////////////////////////
+
+        function RecupData(donnees) {
+            
+            var array = [];
+            var i = 0;
+            var count = 0;
+            var labelSize= [];
+
+            tableau = donnees.map(function(val){
+                array = val.valeur;                
+                return array;
+                
+            });
+
+            i = tableau.length;
+            for (count = 0; count <= i; count++){
+                labelSize[count] = count
+            }
+            console.log(labelSize);
+
+            var dataChart = new Chart(myChart, {
+                type : 'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+                data : {
+                    labels : labelSize,
+                    datasets:[{
+                        label:['Data'],
+                        data: tableau,           
+                    }]
+                },
+                options : {}
+            });
+            
+                   
+        }
+        
+
+        
+
+
 });
