@@ -65,11 +65,9 @@ $(function (){
         
         };
 
-        /* var i = 0;
-        while (i<10){
-        enregistrementAlea();
-        i++;
-        } */
+        
+        /* enregistrementAlea(); */
+        
 
         function reload(){
             var container = document.getElementById("#donnees");
@@ -125,22 +123,35 @@ $(function (){
             });
 
             i = tableau.length;
-            for (count = 0; count <= i; count++){
-                labelSize[count] = count
-            }
-            console.log(labelSize);
 
+            for (count = 0; count <= i; count++){
+
+                labelSize[count] = count
+            
+            }
+            console.log(tableau);
+            
+            
             var dataChart = new Chart(myChart, {
                 type : 'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
                 data : {
-                    labels : labelSize,
+                    labels : 0,
                     datasets:[{
                         label:['Data'],
-                        data: tableau,           
-                    }]
+                        data: [],   
+                        backgroundColor: [
+                            'rgba(235, 241, 0, 0.2)',
+                            
+                        ]        
+                    }],
+
                 },
                 options : {}
             });
+            
+            dataChart.data.datasets[0].data = tableau;
+            dataChart.data.labels = labelSize;
+            dataChart.update();
             
                    
         }
