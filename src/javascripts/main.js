@@ -65,10 +65,16 @@ $(function (){
         
         };
 
+<<<<<<< HEAD
             
          enregistrementAlea(); 
                     
       
+=======
+        
+         enregistrementAlea(); 
+        
+>>>>>>> 790f41105d23dc8086034bbe8f1f1acfb3f68776
 
         function reload(){
             var container = document.getElementById("#donnees");
