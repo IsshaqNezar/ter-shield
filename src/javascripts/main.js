@@ -50,7 +50,7 @@ $(function (){
                 type: 'POST',
                 url: '/data',
                 data: objetDonnee,
-                //success: newData,
+                success: newData,
                 error: error,
             });
 
@@ -66,7 +66,7 @@ $(function (){
         };
 
         
-        /* enregistrementAlea(); */
+         enregistrementAlea(); 
         
 
         function reload(){
