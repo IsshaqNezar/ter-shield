@@ -50,7 +50,7 @@ $(function (){
                 type: 'POST',
                 url: '/data',
                 data: objetDonnee,
-                //success: newData,
+                success: newData,
                 error: error,
             });
 
@@ -65,9 +65,10 @@ $(function (){
         
         };
 
-        
-        /* enregistrementAlea(); */
-        
+            
+         enregistrementAlea(); 
+                    
+      
 
         function reload(){
             var container = document.getElementById("#donnees");
@@ -111,25 +112,37 @@ $(function (){
 
         function RecupData(donnees) {
             
-            var array = [];
-            var i = 0;
-            var count = 0;
+            var array = [], array2 = [];
+            var i = 0, b=0;
+            var count = 0, count2;
             var labelSize= [];
 
+            afficherData(donnees);
+
             tableau = donnees.map(function(val){
-                array = val.valeur;                
+                array = val.valeur;   
+                             
                 return array;
                 
             });
 
             i = tableau.length;
+            console.log(i);
 
-            for (count = 0; count <= i; count++){
+            for(count2 = i-30; count2<= i; count2++){
+
+                console.log(b);
+                array2[b] = tableau[count2];
+                
+                b++;
+            }
+
+            for (count = 0; count <= 30; count++){
 
                 labelSize[count] = count
             
             }
-            console.log(tableau);
+            
             
             
             var dataChart = new Chart(myChart, {
@@ -140,24 +153,24 @@ $(function (){
                         label:['Data'],
                         data: [],   
                         backgroundColor: [
-                            'rgba(235, 241, 0, 0.2)',
-                            
-                        ]        
+                            'rgb(0, 254, 185, 0.3)',
+                        ],
+                        borderColor : [
+                            'rgba(54, 162, 235, 0.6)',
+                        ],    
                     }],
 
                 },
                 options : {}
             });
             
-            dataChart.data.datasets[0].data = tableau;
+            dataChart.data.datasets[0].data = array2;
             dataChart.data.labels = labelSize;
             dataChart.update();
             
                    
         }
-        
 
-        
-
+           
 
 });

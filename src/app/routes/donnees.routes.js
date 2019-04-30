@@ -7,4 +7,6 @@ module.exports = (app) => {
     app.get('/data', donnees.findAll);
 
     app.get('/data/:dataId', donnees.findOne);
+
+    app.delete('/data/:dataId',donnees.delete );
 }

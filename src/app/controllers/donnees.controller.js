@@ -67,3 +67,26 @@ exports.findOne = (req, res) => {
     });
 
 };
+
+//Suprimer une note depuis son Id
+
+exports.delete =(req,res) => {
+    Donnee.findByIdAndRemove(req.params.dataId)
+    .then(donnee => {
+        if(!donnee) {
+            return res.status(404).send({
+                message: "Data not found with id" + req.params.dataId
+            });
+        }
+        res.send({message: "Note deleted successfully"});
+    }).catch(err => {
+        if(err.kind === 'ObjectId' || err.name === 'NotFound') {
+            return res.status(404).send({
+                message: "Note not found with id" + req.params.dataId
+            });
+        }
+        return res.status(500).send({
+            message: "Could not delete data with Id" + req.params.dataId
+        });
+    });
+};
