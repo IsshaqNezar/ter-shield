@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 //  Création de app Express
 
 const app = express();
+const expressWs = require('express-ws')(app);
 
 //  requêtes d'analyse de type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -25,6 +26,8 @@ app.use(function(req, res, next){
 });
 
 app.use(express.static('src'));
+
+
 
 
 // Configuration de la base de données 

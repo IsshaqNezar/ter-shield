@@ -90,3 +90,12 @@ exports.delete =(req,res) => {
         });
     });
 };
+
+exports.webSocket = (res,req) =>{
+    
+    res.on('message' ,(msg) => {
+
+        console.log('test');
+
+    })
+}

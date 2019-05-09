@@ -1,6 +1,8 @@
 $(function (){
 
     var $donnees = $('#donnees');
+    var testSocket = new WebSocket("ws://www.localhost:5000");
+    /* testSocket.addEventListener('open', function(){testSocket.send("test")}); */
 
     var myChart = document.getElementById('myChart').getContext('2d');
     var dataChart = new Chart(myChart, {
@@ -105,7 +107,44 @@ $(function (){
         };
 
        
+        testSocket.onmessage = function(event) {
+
+            var array = [], array2 = [];
+            var i = 0, b=0;
+            var count = 0, count2;
+            var labelSize= [];
+
+            afficherData(donnees);
+
+            tableau = donnees.map(function(val){
+                array = val.valeur;   
+                             
+                return array;
+                
+            });
+
+            i = tableau.length;
+            
+
+            for(count2 = i-30; count2<= i; count2++){
+
+                
+                array2[b] = tableau[count2];
+                
+                b++;
+            }
+
+            for (count = 0; count <= 30; count++){
+
+                labelSize[count] = count
+            
+            }
               
+            dataChart.data.datasets[0].data = array2;
+            dataChart.data.labels = labelSize;
+            dataChart.update();     
+        
+        };
 
 
                /////////////////////////////// CHART //////////////////////////////

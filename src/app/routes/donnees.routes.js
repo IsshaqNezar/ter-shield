@@ -9,4 +9,8 @@ module.exports = (app) => {
     app.get('/data/:dataId', donnees.findOne);
 
     app.delete('/data/:dataId',donnees.delete );
+
+    // WebSocket
+    app.ws('/', donnees.webSocket);
+
 }
