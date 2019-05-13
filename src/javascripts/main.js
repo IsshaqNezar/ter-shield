@@ -1,8 +1,18 @@
 $(function (){
 
+    var donneePars;
     var $donnees = $('#donnees');
     var testSocket = new WebSocket("ws://www.localhost:5000");
-    /* testSocket.addEventListener('open', function(){testSocket.send("test")}); */
+    testSocket.addEventListener('open', function(){testSocket.send("test1")});
+    testSocket.addEventListener('message', 
+    
+    function(msg){
+        donneePars = JSON.parse(msg.data);
+        console.log("donneePars");
+        RecupData(donneePars);
+    });
+    
+
 
     var myChart = document.getElementById('myChart').getContext('2d');
     var dataChart = new Chart(myChart, {
@@ -88,8 +98,6 @@ $(function (){
             aleatoire(0,20);
             saveData(alea);
             console.log('Test');
-
-        
         };
 
         
@@ -97,17 +105,17 @@ $(function (){
                     
       
 
-        function reload(){
+        /* function reload(){
             var container = document.getElementById("#donnees");
             var content = container.innerHTML;
             container.innerHTML= content; 
             
            //this line is to watch the result in console , you can remove it later	
             console.log("Refreshed"); 
-        };
+        }; */
 
        
-        testSocket.onmessage = function(event) {
+        /* testSocket.onmessage = function(event) {
 
             var array = [], array2 = [];
             var i = 0, b=0;
@@ -144,14 +152,34 @@ $(function (){
             dataChart.data.labels = labelSize;
             dataChart.update();     
         
-        };
+        }; */
 
 
                /////////////////////////////// CHART //////////////////////////////
 
         function RecupData(donnees) {
-                    
-            var array = [], array2 = [];
+            console.log(donnees);
+
+            var abscisses = [];
+            var ordonnees = [];
+
+            ordonnees = donnees.map(function(val){
+                var array = val.valeur;
+                return array;
+                
+            })
+            
+            abscisses = donnees.map(function(val){
+                var array = val.date;
+                return array;
+            })
+
+            dataChart.data.datasets[0].data = ordonnees;
+            dataChart.data.labels = abscisses;
+            dataChart.update();
+
+
+            /* var array = [], array2 = [];
             var i = 0, b=0;
             var count = 0, count2;
             var labelSize= [];
@@ -182,15 +210,15 @@ $(function (){
             
             }
               
-            UpdateData(array2, labelSize);
+            UpdateData(array2, labelSize); */
                    
         }
         
-        function UpdateData(array2, labelSize) {
+        /* function UpdateData(array2, labelSize) {
             dataChart.data.datasets[0].data = array2;
             dataChart.data.labels = labelSize;
             dataChart.update();
-        }
+        } */
 
            
 

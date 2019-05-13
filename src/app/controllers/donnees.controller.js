@@ -1,4 +1,5 @@
 const Donnee = require('../models/donnees.model.js');
+var tableauSocket = [];
 
 // Créer et enregistrer des données 
 
@@ -22,6 +23,7 @@ exports.create = (req, res) => {
 
     donnee.save()
     .then(data => {
+        sendData();
         res.send(data);
     }).catch(err => {
         res.status(500).send({
@@ -93,9 +95,37 @@ exports.delete =(req,res) => {
 
 exports.webSocket = (res,req) =>{
     
-    res.on('message' ,(msg) => {
-
-        console.log('test');
+    res.on('message' ,() => {
+        console.log('test2');
+        tableauSocket.push(res);
 
     })
+}
+
+
+sendData =() =>{
+
+    console.log("for");
+
+    Donnee.find().sort({createdAt: -1}).limit(30).exec((err, data) => {
+
+        console.log(2);
+
+        if(err){
+            console.log("errDonnefind");
+        }
+        else {
+            data = JSON.stringify(data);
+            for ( const i in tableauSocket){
+
+                if(tableauSocket[i].readyState !== tableauSocket[i].CLOSED) {
+        
+                    tableauSocket[i].send(data);
+                }
+            }
+
+        };
+
+    });
+
 }
