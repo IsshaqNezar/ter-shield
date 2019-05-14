@@ -100,7 +100,7 @@ $(function (){
             console.log('Test');
         };
 
-        function timerfunc() {
+       /*  function timerfunc() {
             var i =0;
             while(i < 5) {
                 
@@ -110,7 +110,7 @@ $(function (){
             
         };
 
-        timerfunc();
+        timerfunc(); */
          /* enregistrementAlea();  */
 
 
