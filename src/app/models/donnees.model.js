@@ -4,7 +4,7 @@ const DataSchema = mongoose.Schema({
     valeur: String,
     date: String
 }, {
-    timestamp: true
+    timestamps: true
 });
 
 module.exports = mongoose.model('Donnee', DataSchema);

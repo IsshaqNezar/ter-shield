@@ -3,7 +3,7 @@ $(function (){
 
     var donneePars;
     var $donnees = $('#donnees');
-    var testSocket = new WebSocket("ws://www.localhost:5000");
+    var testSocket = new WebSocket("ws://www.localhost:5000/socket");
     testSocket.addEventListener('open', function(){testSocket.send("test1")});
     testSocket.addEventListener('message', 
     
@@ -46,12 +46,12 @@ $(function (){
     var alea;
     var i = 0;
 
-    $.ajax({
+    /*$.ajax({
         type: 'GET',
         url :'/data',
         success: RecupData,
         error: error,
-    });
+    });*/
 
 
         function afficherData(donnees) {
@@ -125,13 +125,15 @@ $(function (){
             ordonnees = donnees.map(function(val){
                 var array = val.valeur;
                 return array;
-                
             })
             
             abscisses = donnees.map(function(val){
                 var array = val.date;
                 return array;
             })
+
+            ordonnees = ordonnees.reverse();
+            abscisses = abscisses.reverse();
 
             dataChart.data.datasets[0].data = ordonnees;
             dataChart.data.labels = abscisses;

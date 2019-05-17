@@ -11,6 +11,6 @@ module.exports = (app) => {
     app.delete('/data/:dataId',donnees.delete );
 
     // WebSocket
-    app.ws('/', donnees.webSocket);
+    app.ws('/socket', donnees.webSocket);
 
 }
