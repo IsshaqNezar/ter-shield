@@ -1,3 +1,6 @@
+
+//Import d'Express et de body-parser
+
 const express = require('express');
 const bodyParser = require('body-parser'); 
 
@@ -5,6 +8,8 @@ const bodyParser = require('body-parser');
 //  Création de app Express
 
 const app = express();
+
+
 const expressWs = require('express-ws')(app);
 
 //  requêtes d'analyse de type - application/x-www-form-urlencoded
@@ -15,10 +20,10 @@ app.use(bodyParser.json())
 
 app.use(function(req, res, next){
 
-    //Website you wish yo allow to connect
+    //Site web autorisés à se connecter
     res.setHeader('Access-Control-Allow-Origin', '*');
 
-    // Reqhest mothods you wish to allow
+    // Méthodes à autoriser
     res.setHeader('Access-Control-Allow-Methods', 'GET', 'POST');
 
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

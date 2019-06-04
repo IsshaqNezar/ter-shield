@@ -42,79 +42,7 @@ $(function (){
         }
     });
 
-    var tableau = [];
-    var alea;
-    var i = 0;
-
-    /*$.ajax({
-        type: 'GET',
-        url :'/data',
-        success: RecupData,
-        error: error,
-    });*/
-
-
-        function afficherData(donnees) {
-            $.each(donnees, function(i, donnee) {
-               $donnees.append('<li>valeur: '+ donnee.valeur+', date:'+ donnee.date +'</li>');
-            });
-        };
-
-        function newData(nouvelleDonnee) {
-           $donnees.append('<li>valeur: '+ nouvelleDonnee.valeur+', date:'+ nouvelleDonnee.date +'</li>');
-           reload();       
-        };
-        
-        function error(xhr,status,error) {
-            alert('error loading orders');
-            console.log(xhr, status, error);
-        };
-
-        function aleatoire(min, max) {
-            
-            alea = Math.floor(Math.random() * (max - min)) + min;
-
-            return alea;                      
-        };
-
-        function saveData(alea) {
-
-            var objetDonnee = {
-                valeur: alea,
-                date: '0',
-            };
-
-            $.ajax({
-                type: 'POST',
-                url: '/data',
-                data: objetDonnee,
-                /* success: RecupData, */
-                error: error,
-            });
-
-        };
-
-        function enregistrementAlea() {
-            aleatoire(0,20);
-            saveData(alea);
-            console.log('Test');
-        };
-
-       /*  function timerfunc() {
-            var i =0;
-            while(i < 5) {
-                
-                setTimeout(enregistrementAlea,3000);
-                i++;
-            }
-            
-        };
-
-        timerfunc(); */
-         /* enregistrementAlea();  */
-
-
-               /////////////////////////////// CHART //////////////////////////////
+                          
 
         function RecupData(donnees) {
             console.log(donnees);
@@ -144,3 +72,66 @@ $(function (){
                 
 
 });
+
+/*  function afficherData(donnees) {
+            $.each(donnees, function(i, donnee) {
+               $donnees.append('<li>valeur: '+ donnee.valeur+', date:'+ donnee.date +'</li>');
+            });
+        };
+
+        function newData(nouvelleDonnee) {
+           $donnees.append('<li>valeur: '+ nouvelleDonnee.valeur+', date:'+ nouvelleDonnee.date +'</li>');
+           reload();       
+        };
+        
+        function error(xhr,status,error) {
+            alert('error loading orders');
+            console.log(xhr, status, error);
+        }; */
+
+/* function aleatoire(min, max) {
+            
+            alea = Math.floor(Math.random() * (max - min)) + min;
+
+            return alea;                      
+        }; */
+
+/* function saveData(alea) {
+
+            var objetDonnee = {
+                valeur: alea,
+                date: '0',
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/data',
+                data: objetDonnee,
+                success: RecupData,
+                error: error,
+            });
+
+        }; */
+
+/* function enregistrementAlea() {
+            aleatoire(0,20);
+            saveData(alea);
+            console.log('Test');
+        }; */
+
+
+/*  function timerfunc() {
+            var i =0;
+            while(i < 5) {
+                
+                setTimeout(enregistrementAlea,3000);
+                i++;
+            }
+            
+        };
+
+        timerfunc(); */
+         /* enregistrementAlea();  */
+
+
+               /////////////////////////////// CHART //////////////////////////////
